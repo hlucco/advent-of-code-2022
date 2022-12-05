@@ -12,7 +12,6 @@ with open("./data.txt",  "r") as file:
         for count, i in enumerate(range(1, len(row), 4)):
             if row[i] != " ":
                 crane_state[count+1].append(row[i])
-        count+=1
     
     while(c_line):
         c_line = file.readline()
