@@ -2,26 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 
+int update(int comp, int cycle, int crow, int pixel) {
+    if ((comp == cycle) || (cycle == (comp - 1)) || (cycle == (comp + 1))) {
+        printf("█");
+    } else {
+        printf(".");
+    }
+
+    if (pixel % 40 == 0) {
+        printf("\n");
+        crow = crow + 1;
+    }
+
+    return crow;
+}
+
 int main(int argc, char **argv) {
 
     char buffer[5000];
     FILE *file = fopen("./data.txt", "r");
 
-    int cycle = 0;
-    int stopcycle = 20;
     int x = 1;
-    int total = 0;
+    int cycle = 0;
+    int pixel = 1;
+    int crow = 0;
+
     while((fgets (buffer, 5000, file)) != NULL) {
-        int ticks = 1;
-
-        if (cycle > 217) {
-            printf("%s\n", buffer);
-            printf("NEW CYCLE\n");
-            printf("cycle: %d\n", cycle);
-            printf("%d\n", stopcycle);
-            printf("%d\n", x);
-        }
-
         char linecopy[strlen(buffer)];
         strcpy(linecopy, buffer);
 
@@ -29,31 +35,25 @@ int main(int argc, char **argv) {
 
         if (strcmp(token, "addx") == 0) {
             char *number = strtok(NULL, " ");
-            // printf("%d\n", atoi(number));
 
-            if (cycle + 1 == stopcycle || cycle + 2 == stopcycle) {
-                printf("THERE\n");
-                printf("cycle * x: %d\n", (stopcycle) * x);
-                total = total + (stopcycle * x);
-                stopcycle = stopcycle + 40;
-            }
+            int compa = x + (40 * crow);
+            crow = update(compa, cycle, crow, pixel);
+            cycle = cycle + 1;
+            pixel = pixel + 1;
+
+            int compb = x + (40 * crow);
+            crow = update(compb, cycle, crow, pixel);
+            cycle = cycle + 1;
+            pixel = pixel + 1;
 
             x = x + atoi(number);
-
-            ticks = 2;
         } else {
-            if (cycle == stopcycle) {
-                printf("cycle * x: %d\n", stopcycle * x);
-                total = total + (stopcycle * x);
-                stopcycle = stopcycle + 40;
-            }
+            int compc = x + (40 * crow);
+            crow = update(compc, cycle, crow, pixel);
+            cycle = cycle + 1;
+            pixel = pixel + 1;
         }
-
-        // printf("total: %d\n", total);
-        cycle = cycle + ticks;
     }
-
-    printf("total: %d\n", total);
 
     fclose(file);
 }

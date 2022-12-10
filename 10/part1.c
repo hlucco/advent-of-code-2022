@@ -5,7 +5,7 @@
 int main(int argc, char **argv) {
 
     char buffer[5000];
-    FILE *file = fopen("./data.txt", "r");
+    FILE *file = fopen("./test.txt", "r");
 
     int cycle = 0;
     int stopcycle = 20;
@@ -18,6 +18,8 @@ int main(int argc, char **argv) {
         strcpy(linecopy, buffer);
 
         char *token = strtok(linecopy, " ");
+
+        printf("%d, %d\n", cycle, x);
 
         if (strcmp(token, "addx") == 0) {
             char *number = strtok(NULL, " ");
