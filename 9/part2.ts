@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { exit } from "process";
 
 function updateHead(startPos: Position, direction: string): Position {
 
