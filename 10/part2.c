@@ -33,25 +33,20 @@ int main(int argc, char **argv) {
 
         char *token = strtok(linecopy, " ");
 
+        int comp = x + (40 * crow);
+        crow = update(comp, cycle, crow, pixel);
+        cycle = cycle + 1;
+        pixel = pixel + 1;
+
         if (strcmp(token, "addx") == 0) {
             char *number = strtok(NULL, " ");
 
-            int compa = x + (40 * crow);
-            crow = update(compa, cycle, crow, pixel);
-            cycle = cycle + 1;
-            pixel = pixel + 1;
-
-            int compb = x + (40 * crow);
-            crow = update(compb, cycle, crow, pixel);
+            comp = x + (40 * crow);
+            crow = update(comp, cycle, crow, pixel);
             cycle = cycle + 1;
             pixel = pixel + 1;
 
             x = x + atoi(number);
-        } else {
-            int compc = x + (40 * crow);
-            crow = update(compc, cycle, crow, pixel);
-            cycle = cycle + 1;
-            pixel = pixel + 1;
         }
     }
 
