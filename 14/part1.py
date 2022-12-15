@@ -48,7 +48,7 @@ with open("./data.txt", "r") as file:
             x_max = max(x_max, x)
             y_min = min(y_min, y)
             y_max = max(y_max, y)
-    
+
     x_diff = x_max - x_min
     y_diff = y_max - y_min
 
